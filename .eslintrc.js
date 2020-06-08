@@ -17,5 +17,6 @@ module.exports = {
     'indent': 0,
     'semi': 0,
     'space-before-function-paren': 0,
+    'quote-props': 0
   }
 }

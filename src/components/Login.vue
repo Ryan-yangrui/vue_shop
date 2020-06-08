@@ -46,7 +46,7 @@ export default {
     return {
       // 登录表单的数据绑定对象
       loginForm: {
-        username: '19908429295',
+        username: 'admin',
         password: '123456'
       },
       // 表单验证规章对象
@@ -54,7 +54,7 @@ export default {
         // 验证工号/手机号/邮箱
         username: [
           { required: true, message: '请输入用户账号', trigger: 'blur' },
-          { min: 6, message: '用户账号不合法', trigger: 'blur' }
+          { min: 5, message: '用户账号不合法', trigger: 'blur' }
         ],
         // 验证密码
         password: [
@@ -70,10 +70,9 @@ export default {
       // console.log(this);
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
-        const { data: res } = await this.$http.post('login/', this.loginForm)
-        if (res.code !== 0) return this.$message.error('登录失败！')
+        const { data: res } = await this.$http.post('login', this.loginForm)
+        if (res.meta.status !== 200) return this.$message.error('登录失败！')
         this.$message.success('登录成功!')
-        console.log(res)
         window.sessionStorage.setItem('token', res.data.token)
         this.$router.push('/home')
       })
